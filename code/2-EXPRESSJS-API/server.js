@@ -1,5 +1,12 @@
 const express = require("express")
+const bodyParser = require("body-parser")
+
+// Instantiate Express object
 const app = express()
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
 // Initiate new data store
 const items = [
@@ -27,31 +34,49 @@ const items = [
 
 // Get root answer
 app.get(`/`, (req, res) => {
-  res.send(`got root`)
+  res.send({
+    message: `got root`
+  })
 })
 
 // Get root API answer
 app.get(`/api`, (req, res) => {
-  res.send(`got api`)
+  res.send({
+    message: `got api`
+  })
 })
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
-  res.send(items)
+  res.send({
+    message: `get all items`,
+    item: items
+  })
 })
 
 // Get a single item
 app.get(`/api/items/:id`, (req, res) => {
+  const itemId = Number(req.params.id)
+
   const item = items.filter(item => {
-    return item.id === Number(req.params.id)
+    return item.id === itemId
   })
-  
-  res.send(item)
+
+  res.send({
+    message: `get single item`,
+    item: item
+  })
 })
 
 // Save an item
 app.post(`/api/items`, (req, res) => {
-  res.send(`saved new item`)
+  if (req.body.id) {
+    const newItem = req.body
+    items.push(newItem)
+    res.send(newItem)
+  } else {
+    res.send({ message: `request body is empty or without id` })
+  }
 })
 
 // Remove all the items
