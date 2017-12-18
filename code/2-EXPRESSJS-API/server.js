@@ -2,7 +2,28 @@ const express = require("express")
 const app = express()
 
 // Initiate new data store
-const data = []
+const data = [
+  {
+    id: 0,
+    name: "Money",
+    color: "various"
+  },
+  {
+    id: 1,
+    name: "Laptop",
+    color: "black"
+  },
+  {
+    id: 2,
+    name: "Mouse",
+    color: "white"
+  },
+  {
+    id: 3,
+    name: "Cable",
+    color: "gray"
+  }
+]
 
 // Get root answer
 app.get(`/`, (req, res) => {
@@ -16,7 +37,7 @@ app.get(`/api`, (req, res) => {
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
-  res.send(`got one item`)
+  res.send(data)
 })
 
 // Get a single item

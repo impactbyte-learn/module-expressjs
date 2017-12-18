@@ -75,7 +75,7 @@ Yang mana memang datanya akan reset lagi jika kita menjalankan ulang aplikasinya
 
 ### Implement the designs
 
-Kita implementasikan berbagai route di atas dalam Express dengan perlahan:
+Kita implementasikan berbagai route tadi dalam Express dengan perlahan:
 
 ```js
 const express = require("express")
@@ -96,7 +96,7 @@ app.get(`/api`, (req, res) => {
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
-  res.send(`got one item`)
+  res.send(`got all items`)
 })
 
 // Get a single item
@@ -130,7 +130,7 @@ app.listen(3000, () => console.log(`Server is listening on localhost:3000`))
 
 Jalankan terlebih dahulu untuk mengecek jika secara garis besar aplikasinya sudah dapat bisa jalan.
 
-Untuk mempermudah pengembangan, kita bisa menggunakan `node-dev` untuk mendapatkan fitur hot-reload ketika aplikasi dijalankan, sehingga ketika ada perubahan dalam code, aplikasinya otomatis akan restart.
+Untuk mempermudah pengembangan, kita bisa menggunakan [`node-dev`](https://github.com/fgnass/node-dev) untuk mendapatkan fitur hot-reload ketika aplikasi dijalankan, sehingga ketika ada perubahan dalam code, aplikasinya otomatis akan restart.
 
 ```sh
 $ npm install -g node-dev
@@ -154,3 +154,91 @@ $ curl -X DELETE localhost:3000/api/items
 $ curl -X DELETE localhost:3000/api/items/0
 $ curl -X PUT localhost:3000/api/items/1
 ```
+
+### Implement the data manipulation
+
+Setelah desain dasar sudah selesai, kita bisa mulai menggabungkan model data dengan logika sesungguhnya.
+
+Masukkan data awal:
+
+```js
+// Initiate new data store
+const data = [
+  {
+    id: 0,
+    name: "Money",
+    color: "various"
+  },
+  {
+    id: 1,
+    name: "Laptop",
+    color: "black"
+  },
+  {
+    id: 2,
+    name: "Mouse",
+    color: "white"
+  },
+  {
+    id: 3,
+    name: "Cable",
+    color: "gray"
+  }
+]
+```
+
+Kemudian implementasikan dalam route yang ada:
+
+```js
+// Get all the items
+app.get(`/api/items`, (req, res) => {
+  res.send(data)
+})
+```
+
+Tes apakah kita bisa mendapatkan data tersebut:
+
+```sh
+$ curl localhost:3000/api/items
+
+[{"id":0,"name":"Money","color":"various"},{"id":1,"name":"Laptop","color":"black"},{"id":2,"name":"Mouse","color":"white"},{"id":3,"name":"Cable","color":"gray"}]%
+```
+
+Jika ingin lebih mudah membacanya, gunakan [HTTPie](https://httpie.org) atau [Postman](https://getpostman.com) selain `cURL`.
+
+```sh
+$ http localhost:3000/api/items
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 163
+Content-Type: application/json; charset=utf-8
+Date: Mon, 18 Dec 2017 15:50:02 GMT
+ETag: W/"a3-/0/ayt2pgwtnblj+E+LmNDECzKE"
+X-Powered-By: Express
+
+[
+    {
+        "color": "various",
+        "id": 0,
+        "name": "Money"
+    },
+    {
+        "color": "black",
+        "id": 1,
+        "name": "Laptop"
+    },
+    {
+        "color": "white",
+        "id": 2,
+        "name": "Mouse"
+    },
+    {
+        "color": "gray",
+        "id": 3,
+        "name": "Cable"
+    }
+]
+```
+
+Karena sumber data masih dalam bentuk JSON, kita bisa mengimplementasikan berbagai logika manipulasi data dengan JavaScript seperti biasa.
