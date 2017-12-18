@@ -58,7 +58,7 @@ app.get(`/api`, (req, res) => {
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
-  // get all data
+  // Send all data
   res.send({
     message: `get all items`,
     item: items
@@ -69,10 +69,10 @@ app.get(`/api/items`, (req, res) => {
 
 // Get a single item
 app.get(`/api/items/:id`, (req, res) => {
-  // get id in integer format
+  // Get id in integer format
   const itemId = Number(req.params.id)
 
-  // get the matched id in data
+  // Get the matched id in data
   const item = items.filter(item => {
     return item.id === itemId
   })
@@ -88,7 +88,7 @@ app.get(`/api/items/:id`, (req, res) => {
 // Save an item
 app.post(`/api/items`, (req, res) => {
   if (req.body.id) {
-    // do if req.body is with data
+    // Do if req.body is with data
     const newItem = req.body
     items.push(newItem)
 
@@ -97,7 +97,7 @@ app.post(`/api/items`, (req, res) => {
       newItem: newItem
     })
   } else {
-    // do if req.body is empty
+    // Do if req.body is empty
     res.send({
       message: `request body is empty or without id`
     })
@@ -143,9 +143,27 @@ app.delete(`/api/items/:id`, (req, res) => {
 
 // -----------------------------------------------------------------------------
 
-// Update an item with new info
+// Update an item with new data
 app.put(`/api/items/:id`, (req, res) => {
-  res.send(`updated one item`)
+  const itemId = Number(req.params.id)
+  const itemBody = req.body
+
+  // Find data index
+  const itemIndex = items.findIndex((item, index) => {
+    return item.id === itemId
+  })
+
+  // Modify matched data
+  items[itemIndex]["name"] = itemBody.name
+  items[itemIndex]["color"] = itemBody.color
+
+  res.send({
+    message: `updated an item through id`,
+    itemId: itemId,
+    itemBody: itemBody,
+    itemIndex: itemIndex,
+    items: items
+  })
 })
 
 // -----------------------------------------------------------------------------
