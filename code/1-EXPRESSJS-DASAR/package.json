@@ -1,0 +1,19 @@
+{
+  "name": "1-expressjs-dasar",
+  "version": "1.0.0",
+  "description": "Express.js dasar",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "M Haidar Hanif <npm@mhaidarhanif.com> (https://mhaidarhanif.com)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.16.2"
+  }
+}
