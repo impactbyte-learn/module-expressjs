@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 
 // Initiate new data store
-const items = [
+const data = [
   {
     id: 0,
     name: "Money",
@@ -37,16 +37,12 @@ app.get(`/api`, (req, res) => {
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
-  res.send(items)
+  res.send(data)
 })
 
 // Get a single item
 app.get(`/api/items/:id`, (req, res) => {
-  const item = items.filter(item => {
-    return item.id === Number(req.params.id)
-  })
-  
-  res.send(item)
+  res.send(`got item with id: ${req.params.id}`)
 })
 
 // Save an item
