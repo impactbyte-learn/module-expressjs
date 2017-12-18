@@ -48,6 +48,7 @@ app.get(`/api`, (req, res) => {
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
+  // get all data
   res.send({
     message: `get all items`,
     item: items
@@ -56,8 +57,10 @@ app.get(`/api/items`, (req, res) => {
 
 // Get a single item
 app.get(`/api/items/:id`, (req, res) => {
+  // get id in integer format
   const itemId = Number(req.params.id)
 
+  // get the matched id in data
   const item = items.filter(item => {
     return item.id === itemId
   })
@@ -71,17 +74,30 @@ app.get(`/api/items/:id`, (req, res) => {
 // Save an item
 app.post(`/api/items`, (req, res) => {
   if (req.body.id) {
+    // do if req.body is with data
     const newItem = req.body
     items.push(newItem)
-    res.send(newItem)
+
+    res.send({
+      message: `saved new item`,
+      newItem: newItem
+    })
   } else {
-    res.send({ message: `request body is empty or without id` })
+    // do if req.body is empty
+    res.send({
+      message: `request body is empty or without id`
+    })
   }
 })
 
 // Remove all the items
 app.delete(`/api/items`, (req, res) => {
-  res.send(`deleted all items`)
+  items.splice(0, items.length)
+
+  res.send({
+    message: `deleted all items`,
+    items: items
+  })
 })
 
 // Remove an item
