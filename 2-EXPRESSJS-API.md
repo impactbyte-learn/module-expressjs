@@ -38,6 +38,7 @@ Misalnya routes-nya seperti:
 | /api/items     | GET       | Get all the items
 | /api/items/:id | GET       | Get a single item
 | /api/items     | POST      | Save an item
+| /api/items     | DELETE    | Remove all the items
 | /api/items/:id | DELETE    | Remove an item
 | /api/items/:id | PUT       | Update an item with new info
 
@@ -71,3 +72,51 @@ Kemudian data model-nya dalam JSON seperti:
 Untuk mempermudah pembelajaran, kita belum menggunakan database, melainkan variabel JSON biasa saja untuk menyimpan data.
 
 Yang mana memang datanya akan reset lagi jika kita menjalankan ulang aplikasinya.
+
+### Implement the designs
+
+Kita implementasikan berbagai route di atas dalam Express dengan perlahan:
+
+```js
+const express = require("express")
+const app = express()
+
+// Initiate new data store
+const data = []
+
+// Get all the items
+app.get("/api/items", (req, res) => {
+  res.send("got one item")
+})
+
+// Get a single item
+app.get("/api/items/:id", (req, res) => {
+  res.send("got item with id", req.params.id)
+})
+
+// Save an item
+app.post("/api/items", (req, res) => {
+  res.send("saved new item")
+})
+
+// Remove all the items
+app.delete("/api/items", (req, res) => {
+  res.send("deleted all items")
+})
+
+// Remove an item
+app.delete("/api/items/:id", (req, res) => {
+  res.send("deleted one item")
+})
+
+// Update an item with new info
+app.put("/api/items/:id", (req, res) => {
+  res.send("updated one item")
+})
+
+// Run the app server
+app.listen(3000, () => console.log("Server is listening on localhost:3000"))
+```
+
+Jalankan terlebih dahulu untuk mengecek jika secara garis besar aplikasinya sudah dapat bisa jalan.
+

@@ -1,8 +1,38 @@
 const express = require("express")
 const app = express()
 
-app.get("/", (req, res) => {
-  res.send("Hello Express!")
+// Initiate new data store
+const data = []
+
+// Get all the items
+app.get("/api/items", (req, res) => {
+  res.send("got one item")
 })
 
+// Get a single item
+app.get("/api/items/:id", (req, res) => {
+  res.send("got item with id", req.params.id)
+})
+
+// Save an item
+app.post("/api/items", (req, res) => {
+  res.send("saved new item")
+})
+
+// Remove all the items
+app.delete("/api/items", (req, res) => {
+  res.send("deleted all items")
+})
+
+// Remove an item
+app.delete("/api/items/:id", (req, res) => {
+  res.send("deleted one item")
+})
+
+// Update an item with new info
+app.put("/api/items/:id", (req, res) => {
+  res.send("updated one item")
+})
+
+// Run the app server
 app.listen(3000, () => console.log("Server is listening on localhost:3000"))
