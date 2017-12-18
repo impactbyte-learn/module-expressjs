@@ -1,0 +1,21 @@
+[{
+    "id": 0,
+    "name": "Money",
+    "color": "various"
+  },
+  {
+    "id": 1,
+    "name": "Laptop",
+    "color": "black"
+  },
+  {
+    "id": 2,
+    "name": "Mouse",
+    "color": "white"
+  },
+  {
+    "id": 3,
+    "name": "Cable",
+    "color": "gray"
+  }
+]

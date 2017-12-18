@@ -111,6 +111,12 @@ Hello Express!
 
 Selamat, kita sudah membuat aplikasi web paling sederhana dengan Express!
 
+Disarankan juga untuk mengabaikan `node_modules` di Git melalui `.gitignore`:
+
+```sh
+echo node_modules > .gitignore
+```
+
 --------------------------------------------------------------------------------
 
 ## Case study
