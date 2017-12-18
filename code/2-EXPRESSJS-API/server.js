@@ -1,6 +1,8 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 
+// -----------------------------------------------------------------------------
+
 // Instantiate Express object
 const app = express()
 // parse application/x-www-form-urlencoded
@@ -8,8 +10,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+// -----------------------------------------------------------------------------
+
 // Initiate new data store
-const items = [
+let items = [
   {
     id: 0,
     name: "Money",
@@ -32,6 +36,8 @@ const items = [
   }
 ]
 
+// -----------------------------------------------------------------------------
+
 // Get root answer
 app.get(`/`, (req, res) => {
   res.send({
@@ -39,12 +45,16 @@ app.get(`/`, (req, res) => {
   })
 })
 
+// -----------------------------------------------------------------------------
+
 // Get root API answer
 app.get(`/api`, (req, res) => {
   res.send({
     message: `got api`
   })
 })
+
+// -----------------------------------------------------------------------------
 
 // Get all the items
 app.get(`/api/items`, (req, res) => {
@@ -54,6 +64,8 @@ app.get(`/api/items`, (req, res) => {
     item: items
   })
 })
+
+// -----------------------------------------------------------------------------
 
 // Get a single item
 app.get(`/api/items/:id`, (req, res) => {
@@ -70,6 +82,8 @@ app.get(`/api/items/:id`, (req, res) => {
     item: item
   })
 })
+
+// -----------------------------------------------------------------------------
 
 // Save an item
 app.post(`/api/items`, (req, res) => {
@@ -90,6 +104,8 @@ app.post(`/api/items`, (req, res) => {
   }
 })
 
+// -----------------------------------------------------------------------------
+
 // Remove all the items
 app.delete(`/api/items`, (req, res) => {
   items.splice(0, items.length)
@@ -100,15 +116,39 @@ app.delete(`/api/items`, (req, res) => {
   })
 })
 
+// -----------------------------------------------------------------------------
+
 // Remove an item
 app.delete(`/api/items/:id`, (req, res) => {
-  res.send(`deleted one item`)
+  const itemId = Number(req.params.id)
+
+  // get the matched item in data
+  const deletedItem = items.filter(item => {
+    return item.id === itemId
+  })
+
+  // mutate data condition
+  const newItems = items.filter(item => {
+    return item.id !== itemId
+  })
+
+  items = newItems
+
+  res.send({
+    message: `deleted an item through id`,
+    deletedItem: deletedItem,
+    newItems: newItems
+  })
 })
+
+// -----------------------------------------------------------------------------
 
 // Update an item with new info
 app.put(`/api/items/:id`, (req, res) => {
   res.send(`updated one item`)
 })
+
+// -----------------------------------------------------------------------------
 
 // Run the app server
 app.listen(3000, () => console.log(`Server is listening on localhost:3000`))
