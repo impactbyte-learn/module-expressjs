@@ -242,7 +242,7 @@ app.use('/', index);
 app.use('/users', users);
 ```
 
-9. Menangkap error jika perlu
+9. Menangkap error jika perlu dengan bantuan file `views/error.jade` untuk menampilan error dengan format HTML
 
 ```js
 // catch 404 and forward to error handler
@@ -264,11 +264,106 @@ app.use(function(err, req, res, next) {
 });
 ```
 
-10. Mengekspor aplikasi ini agar digunakan oleh `bin/www`
+10. Mengekspor aplikasi ini agar bisa digunakan oleh `bin/www`
 
 ```js
 module.exports = app;
 ```
+
+--------------------------------------------------------------------------------
+
+## Handling modular routes and rendering view page
+
+Di dalam file `routes/index.js`, bisa kita lihat bahwa ada pengaturan route di path `/`.
+
+Hasilnya akan me-render halaman `index` (dari `views/index.jade`) yang di dalam `app.js` diproses oleh plugin Jade yang sudah digunakan.
+
+Parameter kedua dalam function `res.render` akan dimasukkan ke dalam template tersebut.
+
+Barulah module route ini diekspor untuk digunakan oleh `app.js`.
+
+`routes/index.js`:
+
+```js
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+```
+
+Sedangkan template-nya akan mengambil variabel yang diberikan melalui parameter di atas.
+
+`views/index.jade`:
+
+```jade
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+```
+
+Mungkin Jade ini agak mengagetkan karena yang tadinya HTML ada berbagai tag pembuka / penutup, di Jade semuanya hilang, lebih simple, tapi mengandalkan indentasi.
+
+Singkatnya, file `index.jade` tersebut akan di-render sebagai HTML ke client setelah proses `res.render` terjadi.
+
+Yang mana `index.jade` itupun mengandalkan file `layout.jade` untuk membungkusnya dengan semua elemen HTML yang esensial (`doctype`, `html`, `head`, `body`) dan menempatkan isinya di `block content`:
+
+```jade
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+```
+
+Silakan diresapi secara perlahan.
+
+Esensi prinsip ini berlaku juga untuk file `routes/users.js`, walaupun tidak me-render halaman, namun hanya data saja:
+
+```js
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
+```
+
+--------------------------------------------------------------------------------
+
+## Handling static assets
+
+Express dapat memuat berbagai file static apapun yang bukan merupakan program.
+
+```js
+app.use(express.static(path.join(__dirname, 'public')));
+```
+
+Di sini berarti apapun yang ada di folder `public`, maka akan bisa diakses sesuai dengan path-nya masing-masing:
+
+* `/public/images` bisa diakses melalui `localhost:3000/images`
+* `/public/javascripts` bisa diakses melalui `localhost:3000/javascripts`
+* `/public/stylesheets` bisa diakses melalui `localhost:3000/stylesheets`
+
+--------------------------------------------------------------------------------
+
+## Conclusion
+
+Berarti kurang lebih aplikasi Express yang dapat memuat backend dan frontend sekaligus secara lengkap memerlukan dan menjalankan:
+
+1. Konfigurasi
+2. Impor berbagai module
+   * Routes
+   * View
+3. Sajian file static
+
+Selebihnya bisa dioprek dulu, nanti juga mengerti.
 
 --------------------------------------------------------------------------------
 
