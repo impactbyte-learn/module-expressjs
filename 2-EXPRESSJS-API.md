@@ -242,3 +242,9 @@ X-Powered-By: Express
 ```
 
 Karena sumber data masih dalam bentuk JSON, kita bisa mengimplementasikan berbagai logika manipulasi data dengan JavaScript seperti biasa.
+
+--------------------------------------------------------------------------------
+
+## Live Code
+
+Terdapat live code via [Glitch](https://glitch.me) di <https://glitch.com/~rest-api> yang dapat dilihat hasilnya di <https://rest-api.glitch.me> dan source code-nya di <https://glitch.com/edit/#!/rest-api>.

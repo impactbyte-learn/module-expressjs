@@ -141,3 +141,14 @@ Untuk lebih lanjut belajar mengenai Express, silakan cek:
 * https://expressjs.com/en/guide/routing.html
 * https://expressjs.com/en/resources/glossary.html
 * https://expressjs.com/en/resources/frameworks.html
+
+Terutama artikel berikut:
+
+* [Going out to eat and understanding the basics of Express.js](https://medium.freecodecamp.org/going-out-to-eat-and-understanding-the-basics-of-express-js-f034a029fb66)
+* [“Hello World!” app with Node.js and Express – freeCodeCamp](https://medium.com/@adnanrahic/hello-world-app-with-node-js-and-express-c1eb7cfa8a30)
+
+--------------------------------------------------------------------------------
+
+## Live Code
+
+Terdapat live code via [Glitch](https://glitch.me) di <https://glitch.com/~basic-express> yang dapat dilihat hasilnya di <https://static-express.glitch.me> dan source code-nya di <https://glitch.com/edit/#!/static-express>.

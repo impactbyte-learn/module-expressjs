@@ -30,6 +30,17 @@
 * [Express](https://expressjs.com)
 * [`express` on npm](https://www.npmjs.com/package/express)
 * [`expressjs/express` on GitHub](https://github.com/expressjs/express)
+* [Going out to eat and understanding the basics of Express.js](https://medium.freecodecamp.org/going-out-to-eat-and-understanding-the-basics-of-express-js-f034a029fb66)
+* [“Hello World!” app with Node.js and Express – freeCodeCamp](https://medium.com/@adnanrahic/hello-world-app-with-node-js-and-express-c1eb7cfa8a30)
+* [CodeAnalogies - Learn the basics of web development with unforgettable tutorials](https://www.codeanalogies.com)
+* [Understanding Express.js](http://evanhahn.com/understanding-express)
+* [Build Web Apps with Express.js - freeCodeCamp](https://www.freecodecamp.org/challenges/build-web-apps-with-expressjs)
+* [Build a Node.js API in Under 30 Minutes – freeCodeCamp](https://medium.freecodecamp.org/building-a-simple-node-js-api-in-under-30-minutes-a07ea9e390d2)
+* [All magic comes with a price](https://shapeshed.com/all-magic-comes-with-a-price)
+
+### Interactive
+
+* [`expressworks`](https://github.com/azat-co/expressworks)
 
 ### Books
 
