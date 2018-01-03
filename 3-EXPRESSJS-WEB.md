@@ -62,6 +62,8 @@ GET / 200 9.486 ms - 170
 ...
 ```
 
+Bukan sulap, bukan sihir!
+
 --------------------------------------------------------------------------------
 
 ## Inside generated Express structure (1)
@@ -155,9 +157,11 @@ Pada aplikasi Express umumnya ada berbagai dependency esensial berikut yang mana
 * `body-parser` - mem-parsing HTTP request body yang berasal dari client ke server
 * `cookie-parser` - mem-parsing HTTP cookie header
 * `debug` - utility untuk debugging 
-* `jade` (sekarang juga disebut `pug`) - template engine untuk menyusun merender HTML yang modular di server, terdapat beberapa file ekstensi `.jade` di project kita
+* `jade` (sekarang juga disebut `pug`) - view/template engine untuk menyusun merender HTML yang modular di server, terdapat beberapa file ekstensi `.jade` di project kita
 * `morgan` - plugin untuk logging HTTP request
 * `serve-favicon` - plugin untuk menyajikan favicon dari server
+
+Untuk lebih lengkapnya bisa lihat satu-satu di `npmjs.com`.
 
 Mulai dari sinilah struktur project hasil generator sangat berperan.
 
@@ -171,6 +175,99 @@ Mulai dari sinilah struktur project hasil generator sangat berperan.
 ├── public # berbagai file static yang disajikan oleh app.js
 ├── routes # berbagai route yang diimpor dan dijalankan oleh app.js
 └── views # berbagai tampilah HTML yang di-render oleh Jade
+```
+
+--------------------------------------------------------------------------------
+
+## Inside generated Express structure (3)
+
+Setelah mengetahui hal penting dari apa yang sudah di-generate, sambil melihat `app.js` secara hati-hati, cara kerja utama aplikasinya kurang lebih:
+
+1. `bin/www` mengonfigurasi untuk menjalankan `app.js`
+
+```js
+var app = require('../app');
+var debug = require('debug')('app:server');
+var http = require('http');
+```
+
+2. `app.js` mengatur aplikasi secara keseluruhan yang diawali dengan mengimpor berbagai dependency yang sudah diinstal
+
+```js
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+```
+
+4. Mengimpor module route yang ada di `routes`
+
+```js
+var index = require('./routes/index');
+var users = require('./routes/users');
+```
+
+5. Meng-instantiate objek `app` dari `express`
+
+```js
+var app = express();
+```
+
+6. Mengatur view engine dengan Jade
+
+```js
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+```
+
+7. Menggunakan berbagai plugin yang diperlukan
+
+```js
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+```
+
+8. Menggunakan module route yang sudah diimpor agar bisa diakses melalui HTTP request
+
+```js
+app.use('/', index);
+app.use('/users', users);
+```
+
+9. Menangkap error jika perlu
+
+```js
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+```
+
+10. Mengekspor aplikasi ini agar digunakan oleh `bin/www`
+
+```js
+module.exports = app;
 ```
 
 --------------------------------------------------------------------------------
