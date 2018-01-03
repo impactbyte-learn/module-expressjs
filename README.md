@@ -9,7 +9,6 @@
 * REST API
 * Web application
 * Express.js plugin
-* Connect with database
 
 --------------------------------------------------------------------------------
 
@@ -18,12 +17,12 @@
 * [Part 1](./1-EXPRESSJS-DASAR.md)
 * [Part 2](./2-EXPRESSJS-API.md)
 * [Part 3](./3-EXPRESSJS-WEB.md)
-* [Part 4](./4-EXPRESSJS-PLUGIN.md)
-* [Part 5](./5-EXPRESSJS-DATABASE.md)
 
 --------------------------------------------------------------------------------
 
 ## References
+
+Untuk memahami lebih jauh mengenai Express dan cara kerjanya secara keseluruhan atau bisa jadi ada hal yang terlewat dalam pedoman ini, silakan bisa eksplorasi dokumentasi, package, repositori, artikel, dan buku yang berkaitan dengan Express.
 
 ### Online
 
