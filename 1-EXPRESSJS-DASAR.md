@@ -20,7 +20,7 @@ Dengan Express, kita dapat membuat berbagai hal berikut dengan lebih cepat darip
 * Parsing cookies 
 * Mengatur session
 * Mengatur routes berbasis path URL paths dan method HTTP request
-* Mengekstrak URL parameter (misalnya `/items/123`)
+* Mengekstrak URL parameter (misalnya `/items/123`) dan URL query (misalnya `/items?id=123`)
 * Menentukan response berbasiskan tipe data
 * Menangani errors
 
@@ -42,7 +42,7 @@ Untuk menginstal Express, disarankan untuk memakai npm `package.json`:
 npm init
 ```
 
-Jawablah beberapa pertanyaan inisialisasi dengan serius.
+Jawablah beberapa pertanyaan inisialisasi dengan serius, dikarenakan informasi yang kamu berikan yang akan digunakan di aplikasi kedepannya.
 
 Setelah itu kita akan lihat file `package.json` yang berisi seperti:
 
