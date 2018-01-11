@@ -36,7 +36,8 @@ Sebagai catatan, pedoman ini menggunakan beberapa kebutuhan dengan versi berikut
 
 ## Installation
 
-Untuk menginstal Express, disarankan untuk memakai npm `package.json`:
+
+Sebelum menginstal Express, disarankan untuk memakai `npm init` dahulu untuk menghasilkan file metadata (informasi dari suatu aplikasi) berupa `package.json`:
 
 ```sh
 npm init
@@ -44,7 +45,7 @@ npm init
 
 Jawablah beberapa pertanyaan inisialisasi dengan serius, dikarenakan informasi yang kamu berikan yang akan digunakan di aplikasi kedepannya.
 
-Setelah itu kita akan lihat file `package.json` yang berisi seperti:
+Setelah itu, akan terbuat file `package.json` yang berisi seperti:
 
 ```json
 {
