@@ -15,8 +15,8 @@
   "author": "M Haidar Hanif <npm@mhaidarhanif.com> (https://mhaidarhanif.com)",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "1.18.2",
-    "express": "4.16.2"
+    "body-parser": "1.18.3",
+    "express": "~4.16.3"
   },
   "devDependencies": {
     "node-dev": "3.1.3"
