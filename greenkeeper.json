@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "code/1-EXPRESSJS-DASAR/package.json",
+        "code/2-EXPRESSJS-API/package.json",
+        "code/3-EXPRESSJS-WEB/package.json",
+        "code/4-EXPRESSJS-PLUGIN/package.json",
+        "code/5-EXPRESSJS-DATABASE/package.json"
+      ]
+    }
+  }
+}
